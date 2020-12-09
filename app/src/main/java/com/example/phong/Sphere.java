@@ -129,7 +129,12 @@ public class Sphere {
 		GLES20.glUniform3fv(light, 1, lightDir, 0);
 		mColorHandle = GLES20.glGetAttribLocation(mProgram, "vColor");
 		
-
+		GLES20.glEnableVertexAttribArray(mColorHandle);
+		GLES20.glVertexAttribPointer(mColorHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, colorBuffer);
+		
+		mNormalHandle = GLES20.glGetAttribLocation(mProgram, "vNormal");	
+		GLES20.glEnableVertexAttribArray(mNormalHandle);
+		GLES20.glVertexAttribPointer(mNormalHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, vertexStride, normalBuffer);
 		
 		mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
 		mNormalMatHandle = GLES20.glGetUniformLocation(mProgram, "uNormalMat");
