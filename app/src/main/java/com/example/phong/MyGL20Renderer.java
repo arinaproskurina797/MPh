@@ -52,8 +52,29 @@ public class MyGL20Renderer implements GLSurfaceView.Renderer {
 		//sphere = new Sphere(10, 30, 60);
 
 	}
+	@Override
+	public void onDrawFrame(GL10 unused) {
+		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
+		
+		Matrix.setLookAtM(mVMatrix, 0, 0, 0, mZoom, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+		//createViewMatrix();
 
-	
+		Matrix.multiplyMM(mPVMatrix, 0, mProjMatrix, 0, mVMatrix, 0);
+
+		Matrix.setRotateM(mRotationMatrixX, 0, mXAngle, 0, 1.0f, 0f);
+
+		Matrix.setRotateM(mRotationMatrixY, 0, mYAngle, 1.0f, 0, 0);
+
+		Matrix.multiplyMM(mTempMatrix, 0, mPVMatrix, 0, mRotationMatrixX, 0);
+		Matrix.multiplyMM(mMVPMatrix, 0, mTempMatrix, 0, mRotationMatrixY, 0);
+
+		Matrix.multiplyMM(mTempMatrix, 0, mVMatrix, 0, mRotationMatrixX, 0);
+		Matrix.multiplyMM(mMVMatrix, 0, mTempMatrix, 0, mRotationMatrixY, 0);
+
+		Matrix.invertM(mTempMatrix, 0, mMVMatrix, 0);
+		Matrix.transposeM(mNormalMatrix, 0, mTempMatrix, 0);
+		drawBalls();
+	}	
 	@Override
 	public void onSurfaceChanged(GL10 unused, int width, int height) {
 		GLES20.glViewport(0, 0, width, height);
