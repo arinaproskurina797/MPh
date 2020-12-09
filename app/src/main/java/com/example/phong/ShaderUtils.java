@@ -35,7 +35,10 @@ public class ShaderUtils {
         }
         return programId;
     }
-
+    static int createShader(Context context, int type, int shaderRawId) { 
+        String shaderText = FileUtils.readTextFromRaw(context, shaderRawId); 
+        return ShaderUtils.createShader(type, shaderText); 
+    }
    
 
     static int createShader(int type, String shaderText) {
