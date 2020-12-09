@@ -62,7 +62,9 @@ public class Sphere {
 		               double x1 = Math.cos(lng);
 		               double y1 = Math.sin(lng);
 		               
-
+				vertices[triIndex*9 + 0 ] = (float)(x * zr0); vertices[triIndex*9 + 1 ] = (float)(y * zr0); vertices[triIndex*9 + 2 ] = (float) z0;
+				vertices[triIndex*9 + 3 ] = (float)(x * zr1); vertices[triIndex*9 + 4 ] = (float)(y * zr1); vertices[triIndex*9 + 5 ] = (float) z1;
+				vertices[triIndex*9 + 6 ] = (float)(x1 * zr0); vertices[triIndex*9 + 7 ] = (float)(y1 * zr0); vertices[triIndex*9 + 8 ] = (float) z0;
 		               
 		               triIndex ++; 
 		               vertices[triIndex*9 + 0 ] = (float)(x1 * zr0);   vertices[triIndex*9 + 1 ] = (float)(y1 * zr0);  	vertices[triIndex*9 + 2 ] = (float) z0;
